@@ -13,10 +13,12 @@ echo ""
 # Construct full image name
 FULL_IMAGE_NAME="$DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG"
 
+docker tag $IMAGE_NAME:$IMAGE_TAG $FULL_IMAGE_NAME
+
 echo "🔐 Logging into Docker Hub..."
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-echo "☁️  Pushing image to Docker Hub..."
+echo "☁️  Pushing image to Docker Hub...$FULL_IMAGE_NAME"
 docker push "$FULL_IMAGE_NAME"
 
 echo "✅ Docker image successfully pushed: $FULL_IMAGE_NAME"
